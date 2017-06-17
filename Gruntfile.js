@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     concat: {
       dist: {
-        src: ['public/lib/jquery.js', 'public/lib/underscore.js', 'public/lib/backbone.js', 'public/lib/handlebars.js', 'public/client/*.js'],
+        src: ['public/**/*.js', '!public/dist/**'],
         dest: 'public/dist/<%= pkg.name %>.js',
       }
     },
@@ -41,7 +41,7 @@ module.exports = function(grunt) {
     cssmin: {
       target: {
         files: {
-          'public/dist/output.css': ['public/*.css']
+          'output.css': ['public/*.css']
         }
       }
     },
