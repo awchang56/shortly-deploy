@@ -3,6 +3,10 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      dist: {
+        src: ['public/**/*.js', '!public/dist/**'],
+        dest: 'public/dist/<%= pkg.name %>.js',
+      }
     },
 
     mochaTest: {
@@ -21,15 +25,25 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      target: {
+        files: {
+          'public/dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+        }
+      }
     },
 
     eslint: {
       target: [
-        // Add list of files to lint here
+        'public/**/*.js'
       ]
     },
 
     cssmin: {
+      target: {
+        files: {
+          'public/dist/output.css': ['public/*.css']
+        }
+      }
     },
 
     watch: {
@@ -88,6 +102,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
+    'eslint', 'cssmin', 'concat', 'uglify'
     // add your deploy tasks here
   ]);
 

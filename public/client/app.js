@@ -7,6 +7,7 @@ window.Shortly = Backbone.View.extend({
   },
 
   initialize: function() {
+    const hello = 'it\'s me';
     console.log( 'Shortly is running' );
     $('body').append(this.render().el);
 
